@@ -8,6 +8,7 @@ import { Subject } from 'rxjs/Subject';
 import { SummaryDetailPage } from '../../pages/summary-detail/summary-detail';
 import { ChannelDetailPage } from '../../pages/channel-detail/channel-detail';
 import { HomePage } from '../../pages/home/home';
+import { LoginPage } from '../../pages/login/login';
 /*
   Generated class for the DataProvider provider.
 
@@ -58,6 +59,7 @@ export class DataProvider {
           this.navBarData.push(nav_item);
         }
       });
+      this.navBarData.push({ 'title': 'Log Out', 'component': LoginPage });
       this.homeCardsSubject.next(this.homeCards);
       this.navBarDataSubject.next(this.navBarData);
     }
