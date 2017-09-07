@@ -125,7 +125,12 @@ export class DataProvider {
             let keys = Object.keys(item['data'][e]);
             let arr: any[] = [];
             keys.forEach((k) => {
-              arr.push(item['data'][e][k]);
+              if (isNaN(item['data'][e][k])) {
+                arr.push(parseFloat(item['data'][e][k]));
+              } else {
+                arr.push(item['data'][e][k]);
+              }
+
             });
 
             barLineData[count === 1 ? 'bar' : 'line'] = arr;

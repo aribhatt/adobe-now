@@ -14,10 +14,10 @@
                     <ion-col class="legend leg-projected" col-4><span *ngIf="todayLegends[2] !== 'undefined'">{{todayLegends[2]}}</span></ion-col>
 
                     <ion-col class="bullet" col-12>
-                        <bullet [actual]="todayBulletData[0]" [target]="todayBulletData[1]" [ranges]="todayBulletData[2]" [height]="height" [rounded]="rounded"></bullet>
+                        <bullet [actual]="todayBulletData[0]" [target]="todayBulletData[1]" [ranges]="todayBulletData[2]" [height]="height" [rounded]="rounded" [colors]="bullets_cols"></bullet>
                     </ion-col>
                     <ion-col class="bullet" col-12>
-                        <bullet [actual]="lastWeekBulletData[0]" [target]="lastWeekBulletData[1]" [ranges]="lastWeekBulletData[2]" [height]="height" [rounded]="rounded"></bullet>
+                        <bullet [actual]="lastWeekBulletData[0]" [target]="lastWeekBulletData[1]" [ranges]="lastWeekBulletData[2]" [height]="height" [rounded]="rounded" [colors]="bullets_cols"></bullet>
                     </ion-col>
 
                     <ion-col *ngIf="lastWeekLegends[0] !== 'undefined'" class="legend leg-actual" col-6><span>{{lastWeekLegends[0]}}</span></ion-col>
@@ -25,6 +25,7 @@
                     <!-- <ion-col class="legend leg-projected" *ngIf="lastWeekLegends[2] !== 'undefined'" col-4><span>{{lastWeekLegends[2]}}</span></ion-col> -->
                 </ion-row>
                 <ion-row class="barchart-wrapper">
+                    <barchart [bardata]="barData" [dashdata]="dashData" [xlabels]="barLabels"></barchart>
 
                 </ion-row>
             </ion-grid>

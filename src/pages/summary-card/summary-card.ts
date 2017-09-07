@@ -25,6 +25,11 @@ export class SummaryCardPage implements OnInit, OnChanges, AfterViewInit {
   showCard: boolean = false;
   height: number = 20;
   rounded: boolean = true;
+  bullets_cols: any[] = ['lightgrey', 'orange', 'green'];
+
+  barData: any[] = [];
+  dashData: any[] = [];
+  barLabels: any[] = [];
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
@@ -67,6 +72,9 @@ export class SummaryCardPage implements OnInit, OnChanges, AfterViewInit {
       this.lastWeekBullet = this.item.getLastWeekBullet();
       this.todayLegends = this.item.getBulletLegends('TODAY');
       this.lastWeekLegends = this.item.getBulletLegends('LASTWEEK');
+      this.barData = this.item.getBarData();
+      this.dashData = this.item.getLineData();
+      this.barLabels = this.item.getBarchartLabels();
     }
   }
 

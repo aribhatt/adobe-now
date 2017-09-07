@@ -12,18 +12,15 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
-$sidenav_bg_color:#272626;
-$sidenav_bg_color_hover:#272626;
-$sidemenu_text: #dedfdf;
 ion-app {
     .side-nav {
         ion-header {
-            background-color: $sidenav_bg_color;
+            background-color: $sidemenu_bg;
             z-index: inherit;
             ion-toolbar {
                 min-height: 108px;
                 .toolbar-background {
-                    background-color: $sidenav_bg_color;
+                    background-color: $sidemenu_bg;
                 }
                 .toolbar-title {
                     font-size: 3rem !important;
@@ -33,7 +30,7 @@ ion-app {
             }
         }
         ion-content {
-            background-color: $sidenav_bg_color;
+            background-color: $sidemenu_bg;
             .fixed-content {
                 margin-top: 108px !important;
             }
@@ -42,7 +39,7 @@ ion-app {
             }
             ion-list {
                 button {
-                    background-color: $sidenav_bg_color;
+                    background-color: $sidemenu_bg;
                     min-height: 64px;
                     .item-inner {
                         margin-right: 16px;
@@ -53,9 +50,10 @@ ion-app {
                         color: $sidemenu_text;
                     }
                     &:hover {
-                        background-color: $sidenav_bg_color_hover;
+                        background-color: $sidemenu_bg;
                     }
                     &:last-child {
+                        border-bottom-width: 0px !important;
                         .item-inner {
                             border-bottom-width: 0px !important;
                         }

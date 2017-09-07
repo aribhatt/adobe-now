@@ -9,5 +9,6 @@ import { GraphBardashPage } from './graph-bardash';
   imports: [
     IonicPageModule.forChild(GraphBardashPage),
   ],
+  exports: [GraphBardashPage]
 })
 export class GraphBardashPageModule {}

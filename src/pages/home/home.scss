@@ -29,50 +29,9 @@ page-home {
                 box-shadow: 1px -2px 4px rgba(0, 0, 0, 0.2);
             }
         }
-        ion-card {
-            padding: 0px;
-            margin: 0px;
-            width: 100%;
-            border-radius: 4px;
-            ion-card-content {
-                padding: 0px;
-                margin: 0px;
-            }
-            ion-grid {
-                padding: 0px;
-                margin: 0px;
-            }
-            .legend {
-                span::before {
-                    margin: 2px 4px;
-                    content: '';
-                    display: inline-block;
-                    height: $legend_circle_dimen;
-                    width: $legend_circle_dimen;
-                    -moz-border-radius: $legend_circle_dimen;
-                    -webkit-border-radius: $legend_circle_dimen;
-                    border-radius: $legend_circle_dimen;
-                }
-            }
-            .leg-actual {
-                span::before {
-                    background-color: orange;
-                }
-            }
-            .leg-target {
-                span::before {
-                    background-color: green;
-                }
-            }
-            .leg-projected {
-                span::before {
-                    background-color: lightgray;
-                }
-            }
-            .barchart-wrapper {
-                height: 80px;
-                background-color: black;
-            }
-        }
+    }
+    .card-wrapper {
+        margin-top: 4px;
+        margin-bottom: 4px;
     }
 }

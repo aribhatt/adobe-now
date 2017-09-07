@@ -9,5 +9,6 @@ import { NotificationPage } from './notification';
   imports: [
     IonicPageModule.forChild(NotificationPage),
   ],
+  exports: [NotificationPage]
 })
 export class NotificationPageModule {}
