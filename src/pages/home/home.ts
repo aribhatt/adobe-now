@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
 
@@ -9,20 +9,31 @@ import { DataProvider } from '../../providers/data/data';
 export class HomePage implements OnInit {
 
   cards: any[] = [];
+  profile_name: string = '';
+  profile_company: string = '';
+  profile_img_url: string = '';
 
   constructor(public navCtrl: NavController, public dataProvider: DataProvider) {
+    let self = this;
     this.populateHomeCards();
+    this.dataProvider.getProfileObservable().subscribe(
+      (data)=>{
+        if(data){
+          self.profile_name = data['display_name'];
+          self.profile_company = data['display_title'];
+          self.profile_img_url = data['display_image'];
+        }
+      },
+      err =>{
+
+      }
+    );
 
   }
 
   ngOnInit() {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    console.log(this.dataProvider);
-    console.log('This component is ', this);
-    
-
-
   }
 
   populateHomeCards() {

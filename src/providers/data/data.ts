@@ -24,16 +24,31 @@ export class DataProvider {
   homeCardsSubject: Subject<any[]> = new Subject<any[]>();
   navBarData: any[] = [];
   navBarDataSubject: Subject<any[]> = new Subject<any[]>();
+  profile: any = {};
+  profile_subject:Subject<any> = new Subject<any>()
 
   constructor(public http: Http, private utils: UtilsProvider) {
   }
 
   fetchData(url: string) {
     let self = this;
-    this.http.get(url).subscribe(
-      (data) => { self.parseData(data.json()) },
-      (err) => { }
-    );
+    if (url) {
+      this.http.get(url).subscribe(
+        (data) => { self.parseData(data.json()) },
+        (err) => { }
+      );
+    }
+  }
+
+  setProfile(obj: any) {
+    if (obj) {
+      this.profile = obj;
+      this.profile_subject.next(this.profile);
+    }
+  }
+
+  getProfileObservable(){
+    return this.profile_subject.asObservable();
   }
 
   parseData(json: any) {
@@ -41,7 +56,7 @@ export class DataProvider {
       this.homeCards = [];
       this.navBarData = [];
       let cards: any[] = json['cards'];
-
+      this.setProfile(json['profile']);
 
       this.navBarData.push({ 'title': 'Home', 'component': HomePage });
       cards.forEach((item) => {
@@ -87,7 +102,7 @@ export class DataProvider {
           if (objs.length === 1) {
             let temp = item['data'][e][objs[0]];
             if (count === 0) {
-              vars.push('Today'+ ': ' + this.utils.getKFormatted(temp));
+              vars.push('Today' + ': ' + this.utils.getKFormatted(temp));
             } else {
               vars.push(e + ': ' + this.utils.getKFormatted(temp));
             }

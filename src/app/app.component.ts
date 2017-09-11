@@ -22,6 +22,7 @@ export class MyApp implements OnInit {
   pages: Array<{ title: string, component: any }>;
   navMenu: any[] = [];
 
+
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public dataProvider: DataProvider) {
     this.initializeApp();
     let self = this;
@@ -40,7 +41,6 @@ export class MyApp implements OnInit {
 
       }
     );
-
   }
 
   ngOnInit() {

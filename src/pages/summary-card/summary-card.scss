@@ -43,12 +43,12 @@
                 margin: 0px;
             }
             .legend {
-                line-height: 12px;
-                font-size: 12px;
+                line-height: 10px;
+                font-size: 10px;
                 padding: 2px;
                 span {
-                    line-height: 12px;
-                    font-size: 12px;
+                    line-height: 10px;
+                    font-size: 10px;
                 }
                 span::before {
                     margin-right: 8px;
@@ -59,7 +59,8 @@
                     -moz-border-radius: $legend_circle_dimen;
                     -webkit-border-radius: $legend_circle_dimen;
                     border-radius: $legend_circle_dimen;
-                    line-height: 12px;
+                    line-height: 10px;
+                    font-size: 10px;
                     vertical-align: middle;
                 }
             }
