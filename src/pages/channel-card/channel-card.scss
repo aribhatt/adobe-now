@@ -60,27 +60,27 @@ $legend_circle_dimen: 8px;
                 vertical-align: middle;
             }
         }
-        .legends[name="Paid Search"] {
+        .legends:nth-child(1) {
             &:before {
                 background-color: #d5406a;
             }
         }
-        .legends[name="Affiliates"] {
+        .legends:nth-child(2) {
             &:before {
                 background-color: #0d6580;
             }
         }
-        .legends[name="Organic"] {
+        .legends:nth-child(3) {
             &:before {
                 background-color: #21daa0;
             }
         }
-        .legends[name="Display"] {
+        .legends:nth-child(4) {
             &:before {
                 background-color: #d3885f;
             }
         }
-        .legends[name="Others"] {
+        .legends:nth-child(5) {
             &:before {
                 background-color: #0b94ff;
             }
