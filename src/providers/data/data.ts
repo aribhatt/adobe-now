@@ -2,13 +2,16 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { SummaryCard } from './models/summary-card.model';
+import { SummaryPage } from './models/summary-page.model';
 import { ChannelCard } from './models/channel-card.model';
+import { ChannelPage } from './models/channel-page.model';
 import { Subject } from 'rxjs/Subject';
 
 import { SummaryDetailPage } from '../../pages/summary-detail/summary-detail';
 import { ChannelDetailPage } from '../../pages/channel-detail/channel-detail';
 import { HomePage } from '../../pages/home/home';
 import { LoginPage } from '../../pages/login/login';
+import { UtilsProvider } from '../utils/utils';
 /*
   Generated class for the DataProvider provider.
 
@@ -22,8 +25,7 @@ export class DataProvider {
   navBarData: any[] = [];
   navBarDataSubject: Subject<any[]> = new Subject<any[]>();
 
-  constructor(public http: Http) {
-    console.log('Hello DataProvider Provider');
+  constructor(public http: Http, private utils: UtilsProvider) {
   }
 
   fetchData(url: string) {
@@ -45,17 +47,22 @@ export class DataProvider {
       cards.forEach((item) => {
         if (item['template'] === 'channels') {
           let card = this.processChannelCard(item['name'], item['collection']);
+          let detail_pages = this.processChannelPage(item['detail_trends']);
+          console.log(detail_pages);
           this.homeCards.push(card);
           let nav_item = {};
           nav_item['title'] = item['name'];
-          nav_item['component'] = SummaryDetailPage;
+          nav_item['component'] = ChannelDetailPage;
           this.navBarData.push(nav_item);
         } else if (item['template'] === 'summary' || item['template'] === 'conversion') {
           let card = this.processSummaryCard(item['template'], item['name'], item['collection']);
+          let detail_pages = this.processSummaryPage(item['template'], item['detail_trends']);
+          card.setDetailPages(detail_pages);
           this.homeCards.push(card);
           let nav_item = {};
           nav_item['title'] = item['name'];
           nav_item['component'] = SummaryDetailPage;
+          nav_item['payload'] = detail_pages;
           this.navBarData.push(nav_item);
         }
       });
@@ -78,13 +85,14 @@ export class DataProvider {
         for (let e in item['data']) {
           let objs = Object.keys(item['data'][e]);
           if (objs.length === 1) {
+            let temp = item['data'][e][objs[0]];
             if (count === 0) {
-              vars.push('Today');
+              vars.push('Today'+ ': ' + this.utils.getKFormatted(temp));
             } else {
-              vars.push(e);
+              vars.push(e + ': ' + this.utils.getKFormatted(temp));
             }
 
-            let temp = item['data'][e][objs[0]];
+
             if (isNaN(temp)) {
               temp = parseFloat(temp);
             }
@@ -101,13 +109,14 @@ export class DataProvider {
         for (let e in item['data']) {
           let objs = Object.keys(item['data'][e]);
           if (objs.length === 1) {
+            let temp = item['data'][e][objs[0]];
             if (count === 0) {
-              vars.push('Last Week');
+              vars.push('Last Week' + ': ' + this.utils.getKFormatted(temp));
             } else {
-              vars.push(e);
+              vars.push(e + ': ' + this.utils.getKFormatted(temp));
             }
             //lweek[e] = item['data'][e][objs[0]];
-            let temp = item['data'][e][objs[0]];
+
             if (isNaN(temp)) {
               temp = parseFloat(temp);
             }
@@ -146,27 +155,104 @@ export class DataProvider {
   }
 
   processSummaryPage(type, detail_trends: any[]) {
-    let lweekBullet: any = {}
-    let todayBullet: any = {};
-    let lineChart: any = {};
+    let pages: any = [];
+
 
     if (Object.prototype.toString.call(detail_trends) === '[object Array]') {
-      detail_trends.forEach((item, index) => {
-        if (index === 0) {
+      detail_trends.forEach((item) => {//each slide/SummaryPage object
+        let axis_labels: any = [];
+        let bullets: any[] = [];
+        let line_one_xlabels = [];
+        let line_one_vals = [];
+        let line_two_xlabels = [];
+        let line_two_vals = [];
 
-        } else if (index === 1) {
+        item.forEach((obj, index) => {
+          if (index === 0 || index === 1) {
+            let bullet = {};
+            let bullet_data: any[] = [];
+            let isPer: boolean = false;
+            for (let o in obj) {
+              if (Object.prototype.toString.call(obj[o]) === '[object Object]') {
+                let collection = obj[o];
 
-        } else if (index === 2) {
+                for (let d in collection['data']) {
+                  let arr = [];
+                  for (let i in collection['data'][d]) {
+                    let temp = collection['data'][d][i];
+                    if (isNaN(temp)) {
+                      let str: string = temp;
+                      if (str.endsWith('%')) {
+                        isPer = true;
+                        temp = parseFloat(temp);
+                      }
+                    }
+                    arr.push(temp);
 
-        }
+
+                  }
+                  bullet_data.push(arr);
+                }
+              }
+            }
+            bullet['data'] = bullet_data;
+            bullet['isPer'] = isPer;
+
+          }
+          else if (index === 2) {
+
+            for (let o in obj) {
+              if (Object.prototype.toString.call(obj[o]) === '[object Object]') {
+                let collection = obj[o];
+                let count = 0;
+
+                for (let col in collection) {
+                  if (count == 0) {
+                    let axis = collection[col];
+                    for (let a in axis) {
+                      axis_labels.push(axis[a]);
+                    }
+                  } else if (count == 1) {
+                    let data = collection[col];
+                    let iter = 0;
+                    for (let d in data) {
+                      let line_arr = data[d];
+                      for (let x in line_arr) {
+                        let val = line_arr[x];
+                        if (val === null) {
+                          val = 'abcd';
+                        }
+                        if (iter == 0) {
+                          line_one_xlabels.push(x);
+                          line_one_vals.push(val);
+                        } else if (iter == 1) {
+                          line_two_xlabels.push(x);
+                          line_two_vals.push(val);
+                        }
+                      }
+                      iter++;
+                    }
+                  }
+                  count++;
+                }
+              }
+            }
+
+          }
+        });
+        let page = new SummaryPage(line_one_vals, line_one_xlabels, line_two_vals, line_two_xlabels, bullets, axis_labels);
+        pages.push(page);
       });
-    }
 
+    }
+    return pages;
   }
 
   processChannelCard(name: string, collection: any[]) {
     let bullets: any = {};
     let donut: any = {};
+    let donut_cols: any[] = [];
+    let self = this;
 
     if (Object.prototype.toString.call(collection) === '[object Array]') {
       collection.forEach((item, index) => {
@@ -179,7 +265,8 @@ export class DataProvider {
               let dataObj: any[] = Object.keys(data[param][day[0]]) || [];
               dataObj.forEach(d => {
                 if (index === 0) {
-                  donut[d] = data[param][day[0]][d]
+                  donut[d] = data[param][day[0]][d];
+                  donut_cols.push(self.utils.getColor(d));
                 } else if (index === 1) {
                   if (bullets[d]) {
                     bullets[d][param] = [data[param][day[0]][d]];
@@ -198,10 +285,79 @@ export class DataProvider {
     }
     //console.log(card);
     //return {'bullets': bullets, 'donut': donut};
-    return new ChannelCard(name, bullets, donut);;
+    return new ChannelCard(name, bullets, donut, donut_cols);;
   }
 
-  processChannelPage() {
+  processChannelPage(detail_trends: any[]) {
+    let detail_pages: any[] = [];
+
+    detail_trends.forEach((page) => {
+      if (Object.prototype.toString.call(page) === '[object Array]') {//each ChannelPage
+        let today_bullet_data: any[] = [];
+        let lastweek_bullet_data: any[] = [];
+        page.forEach((item, index) => {
+          for (let key in item) {
+            if (Object.prototype.toString.call(item[key]) === '[object Object]') {
+              let collection = item[key];
+              let count = 0;
+              for (let col in collection) {
+                if (count == 1) {
+                  let bullet: any[] = [];
+                  let data = collection[col];
+                  let iter = 0;
+                  for (let d in data) {
+                    let day_obj = data[d];
+                    for (let bull in day_obj) {
+                      let bullet_obj = day_obj[bull];
+                      let bullet_no = 0;
+                      for (let b in bullet_obj) {
+
+                        let isPer = false;
+
+                        let temp: any = bullet_obj[b];
+                        if (isNaN(temp)) {
+                          if (temp.toString().endsWith('%')) {
+                            isPer = true;
+                          }
+
+                          temp = parseFloat(temp);
+                        }
+                        if (iter == 0) {
+                          let obj = {};
+                          obj['title'] = b;
+                          obj['actual'] = [temp];
+                          obj['isPer'] = isPer;
+                          bullet.push(obj);
+                        } else {
+                          bullet[bullet_no]['projected'] = [temp];
+                        }
+                        bullet_no++;
+                      }
+                    }
+                    iter++;
+                  }
+                  if (index == 0) {
+                    lastweek_bullet_data.push(bullet);
+                  }
+                  else if (index == 1) {
+                    today_bullet_data.push(bullet);
+                  }
+
+
+                }
+                count++;
+
+              }
+            }
+          }
+
+        });
+        let page_obj = new ChannelPage(today_bullet_data, lastweek_bullet_data);
+        detail_pages.push(page_obj);
+      }
+
+    });
+    return detail_pages;
 
   }
 

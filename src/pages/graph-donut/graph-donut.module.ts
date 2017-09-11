@@ -9,5 +9,6 @@ import { GraphDonutPage } from './graph-donut';
   imports: [
     IonicPageModule.forChild(GraphDonutPage),
   ],
+  exports: [GraphDonutPage]
 })
 export class GraphDonutPageModule {}

@@ -15,6 +15,11 @@ import { C3ServiceProvider } from '../providers/c3-service/c3-service';
 import { HttpModule } from '@angular/http';
 
 import { HomePageModule } from '../pages/home/home.module';
+import { AboutPageModule } from '../pages/about/about.module';
+import { ChannelDetailPageModule } from '../pages/channel-detail/channel-detail.module';
+import { LoginPageModule } from '../pages/login/login.module';
+import { NotificationPageModule } from '../pages/notification/notification.module';
+import { SummaryDetailPageModule } from '../pages/summary-detail/summary-detail.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +30,12 @@ import { HomePageModule } from '../pages/home/home.module';
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    HomePageModule
+    HomePageModule,
+    AboutPageModule,
+    ChannelDetailPageModule,
+    LoginPageModule,
+    NotificationPageModule,
+    SummaryDetailPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

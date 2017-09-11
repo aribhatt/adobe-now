@@ -31,37 +31,59 @@ $legend_circle_dimen: 8px;
     }
     ion-card {
         .legends-wrapper {
-            padding: 10px;
-        }
-        .legends::before {
-            margin: 2px 4px;
-            content: '';
-            display: inline-block;
-            height: $legend_circle_dimen;
-            width: $legend_circle_dimen;
-            -moz-border-radius: $legend_circle_dimen;
-            -webkit-border-radius: $legend_circle_dimen;
-            border-radius: $legend_circle_dimen;
-        }
-        .leg-actua::before {
-            background-color: orange;
-        }
-        .leg-target::before {
-            background-color: green;
-        }
-        .leg-projected::before {
-            background-color: lightgray;
+            justify-content: center;
         }
         .donut-wrapper {
-            min-height: 160px;
             padding: 2px;
+            text-align: center;
         }
         .bullets-wrapper {
-            min-height: 160px;
             padding: 2px;
+            text-align: center;
+            ion-col[col-12] {
+                display: inline-block;
+            }
         }
         .legends {
             text-overflow: ellipsis;
+            margin: 3px;
+            font-size: 10px;
+            &:before {
+                margin: 2px 4px;
+                content: '';
+                display: inline-block;
+                height: $legend_circle_dimen;
+                width: $legend_circle_dimen;
+                -moz-border-radius: $legend_circle_dimen;
+                -webkit-border-radius: $legend_circle_dimen;
+                border-radius: $legend_circle_dimen;
+                vertical-align: middle;
+            }
+        }
+        .legends[name="Paid Search"] {
+            &:before {
+                background-color: #d5406a;
+            }
+        }
+        .legends[name="Affiliates"] {
+            &:before {
+                background-color: #0d6580;
+            }
+        }
+        .legends[name="Organic"] {
+            &:before {
+                background-color: #21daa0;
+            }
+        }
+        .legends[name="Display"] {
+            &:before {
+                background-color: #d3885f;
+            }
+        }
+        .legends[name="Others"] {
+            &:before {
+                background-color: #0b94ff;
+            }
         }
     }
 }

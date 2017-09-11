@@ -4,6 +4,7 @@ export class SummaryCard{
     lastWeekBullet: any = {};
     todayBullet: any = {};
     barChartData: any = {};
+    detail_pages: any[] = [];
 
     constructor(type: string, name:string, lastWeekBullet: any, todayBullet: any, barChartData:any){
         this.type = type;
@@ -59,5 +60,13 @@ export class SummaryCard{
 
     getBarchartLabels(){
         return this.barChartData['labels'] || [];
+    }
+
+    setDetailPages(detail_pages: any[]){
+        this.detail_pages = detail_pages;
+    }
+
+    getDetailPages(){
+        return this.detail_pages;
     }
 }

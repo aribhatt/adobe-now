@@ -16,6 +16,13 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class ChannelCardPage implements OnInit, OnChanges, AfterViewInit {
   @Input('card') item;
   name: string = '';
+  donut_data: any[] = [];
+  donut_colors: any[] = [];
+
+  legends: any[] = [];
+  bullet_data: any[] = [];
+  bullet_colors: any[] = [];
+  bullet_height: number = 18;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -46,7 +53,16 @@ export class ChannelCardPage implements OnInit, OnChanges, AfterViewInit {
   setData(){
     if(this.item){
       this.name = this.item.getName();
+      this.donut_data = this.item.getDonut();
+      this.donut_colors = this.item.getDonutColors();
 
+      let cols = this.item.getBulletColors();
+      for(let e=0; e<3; e++){
+        let col_arr = ['lightgrey', cols[e], 'transparent'];
+        this.bullet_colors.push(col_arr);
+      }
+      this.bullet_data = this.item.getBulletDataAsArray();
+      this.legends = this.item.getLabels();
     }
   }
 

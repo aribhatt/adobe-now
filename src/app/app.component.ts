@@ -4,20 +4,25 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
+import { LoginPage } from '../pages/login/login';
+import { NotificationPage } from '../pages/notification/notification';
+import { AboutPage } from '../pages/about/about';
+import { SummaryDetailPage } from '../pages/summary-detail/summary-detail';
+import { ChannelDetailPage } from '../pages/channel-detail/channel-detail';
 import { ListPage } from '../pages/list/list';
-import { DataProvider} from '../providers/data/data';
+import { DataProvider } from '../providers/data/data';
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp implements OnInit{
+export class MyApp implements OnInit {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = HomePage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{ title: string, component: any }>;
   navMenu: any[] = [];
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public dataProvider: DataProvider ) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public dataProvider: DataProvider) {
     this.initializeApp();
     let self = this;
 
@@ -27,11 +32,11 @@ export class MyApp implements OnInit{
       { title: 'List', component: ListPage }
     ];
     this.dataProvider.getNavBarDataObservable().subscribe(
-      (data: any[])=>{
+      (data: any[]) => {
         //console.log(data);
         self.navMenu = data;
       },
-      (err)=>{
+      (err) => {
 
       }
     );
@@ -42,7 +47,7 @@ export class MyApp implements OnInit{
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.dataProvider.fetchData('../assets/json/data.json');
-    
+
   }
 
   initializeApp() {
@@ -57,6 +62,8 @@ export class MyApp implements OnInit{
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    if (page && page.title !== 'Home') {
+      this.nav.push(page.component, page.payload);
+    }
   }
 }

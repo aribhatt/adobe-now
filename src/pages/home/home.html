@@ -3,16 +3,27 @@
         <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-        <ion-title>Home</ion-title>
+        <ion-title>Adobe Now</ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-    <h3>Ionic Menu Starter</h3>
 
-    <p>
-        If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-    </p>
+    <ion-grid class="profile-wrapper">
+        <ion-row class="icons">
+            <ion-col col-3><img class="icon-left" /></ion-col>
+            <ion-col col-6>
+                <img class="profile" />
+            </ion-col>
+            <ion-col col-3><img class="icon-right" /></ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-12 class="credentials">
+                <p>John Doe</p>
+                <p>Manager</p>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
     <div class="card-wrapper" *ngFor="let item of cards">
 
         <summary-card *ngIf="item.getType() === 'summary' || item.getType() === 'conversion'" [card]="item"></summary-card>
