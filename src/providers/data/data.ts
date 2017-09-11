@@ -278,10 +278,10 @@ export class DataProvider {
             let day: any[] = Object.keys(data[param]) || [];
             if (data[param][day[0]]) {
               let dataObj: any[] = Object.keys(data[param][day[0]]) || [];
-              dataObj.forEach(d => {
+              dataObj.forEach((d, i) => {
                 if (index === 0) {
                   donut[d] = data[param][day[0]][d];
-                  donut_cols.push(self.utils.getColor(d));
+                  donut_cols.push(self.utils.getColor(i));
                 } else if (index === 1) {
                   if (bullets[d]) {
                     bullets[d][param] = [data[param][day[0]][d]];

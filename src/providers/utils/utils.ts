@@ -12,20 +12,20 @@ declare var d3: any;
 @Injectable()
 export class UtilsProvider {
   public kformat = d3.format('.3s');
-  private donut_color_map = {
-    'paid search': '#d5406a',
-    'affiliates': '#0d6580',
-    'organic': '#21daa0',
-    'display': '#d3885f',
-    'others': '#0b94ff'
-  }
+  private donut_color_map = [
+    '#d5406a',
+    '#0d6580',
+    '#21daa0',
+    '#d3885f',
+    '#0b94ff'
+  ];
   constructor(public http: Http) {
     console.log('Hello UtilsProvider Provider');
   }
 
-  getColor(key: string){
-    if(key){
-      return this.donut_color_map[key.toLowerCase()];
+  getColor(key: number){
+    if(key < this.donut_color_map.length){
+      return this.donut_color_map[key];
     }
   }
 
