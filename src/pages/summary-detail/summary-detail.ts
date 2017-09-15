@@ -15,8 +15,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SummaryDetailPage {
 
+  page_data: any;
+  compare_bullet_data: any[];
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     console.log('inside detail', navParams);
+    if(Object.prototype.toString.call(navParams.data) === '[object Array]'){
+      this.page_data = navParams.data[0];
+      this.compare_bullet_data = this.page_data['compareBullet'];
+    }
   }
 
   ionViewDidLoad() {

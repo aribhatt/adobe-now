@@ -1,4 +1,4 @@
-    $legend_circle_dimen: 10px;
+    $legend_circle_dimen: 8px;
     .card {
         .title {
             width: 70%;
@@ -43,15 +43,15 @@
                 margin: 0px;
             }
             .legend {
-                line-height: 10px;
-                font-size: 10px;
+                line-height: $legend_circle_dimen;
+                font-size: $legend_circle_dimen;
                 padding: 2px;
                 span {
-                    line-height: 10px;
-                    font-size: 10px;
+                    line-height: $legend_circle_dimen;
+                    font-size: $legend_circle_dimen;
                 }
                 span::before {
-                    margin-right: 8px;
+                    margin-right: 4px;
                     content: '';
                     display: inline-block;
                     height: $legend_circle_dimen;
@@ -59,8 +59,8 @@
                     -moz-border-radius: $legend_circle_dimen;
                     -webkit-border-radius: $legend_circle_dimen;
                     border-radius: $legend_circle_dimen;
-                    line-height: 10px;
-                    font-size: 10px;
+                    line-height: $legend_circle_dimen;
+                    font-size: $legend_circle_dimen;
                     vertical-align: middle;
                 }
             }

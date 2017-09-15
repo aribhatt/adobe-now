@@ -5,6 +5,7 @@ export class SummaryPage{
     line_one_xlabel: any[];
     line_two_xlabel: any[];
     labels: any[] = [];
+    page_name: string = '';
 
     constructor(line_one_data: any[], line_one_xlabel: any[], line_two_data: any[], line_two_xlabel: any[], compareBullet: any[], labels:any[]){
         this.line_one_data = line_one_data;
@@ -35,5 +36,13 @@ export class SummaryPage{
 
     getLabels(){
         return this.labels;
+    }
+    
+    setPageName(name: string){
+        this.page_name = name;
+    }
+
+    getPageName(){
+        return this.page_name;
     }
 }

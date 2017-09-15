@@ -1,3 +1,57 @@
-page-channel-detail {
-
+.toolbar-content {
+    display: flex !important;
+    justify-content: center !important;
+    ion-chip {
+        margin-left: -56px;
+        color: white;
+        background-color: blue;
+        ion-icon {
+            background-color: blue !important;
+            color: white !important;
+        }
+    }
 }
+
+.page_name {
+    text-align: center;
+    margin: 20px 10px;
+}
+
+.legend-wrapper-page {
+    text-align: right;
+    margin: 10px;
+    .legend {
+        color: black;
+        font-size: 10px;
+        line-height: 10px;
+        margin-right: 5px;
+        &:before {
+            content: "";
+            height: 8px;
+            width: 8px;
+            border-radius: 8px;
+            line-height: 10px;
+            margin: 0 3px;
+            background-color: black;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        &.lg-actual {
+            &:before {
+                background-color: orange;
+            }
+        }
+        &.lg-target {
+            &:before {
+                background-color: green;
+            }
+        }
+        &.lg-projected {
+            &:before {
+                background-color: lightgrey;
+            }
+        }
+    }
+}
+
+@media only screen and (orientation: landscape) {}

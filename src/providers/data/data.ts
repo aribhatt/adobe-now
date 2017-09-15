@@ -11,6 +11,7 @@ import { SummaryDetailPage } from '../../pages/summary-detail/summary-detail';
 import { ChannelDetailPage } from '../../pages/channel-detail/channel-detail';
 import { HomePage } from '../../pages/home/home';
 import { LoginPage } from '../../pages/login/login';
+import { NotificationPage } from '../../pages/notification/notification';
 import { UtilsProvider } from '../utils/utils';
 /*
   Generated class for the DataProvider provider.
@@ -58,20 +59,21 @@ export class DataProvider {
       let cards: any[] = json['cards'];
       this.setProfile(json['profile']);
 
-      this.navBarData.push({ 'title': 'Home', 'component': HomePage });
+      //this.navBarData.push({ 'title': 'Home', 'component': HomePage });
       cards.forEach((item) => {
         if (item['template'] === 'channels') {
           let card = this.processChannelCard(item['name'], item['collection']);
-          let detail_pages = this.processChannelPage(item['detail_trends']);
+          let detail_pages = this.processChannelPage(item['name'],item['detail_trends']);
           console.log(detail_pages);
           this.homeCards.push(card);
           let nav_item = {};
           nav_item['title'] = item['name'];
           nav_item['component'] = ChannelDetailPage;
+          nav_item['payload'] = detail_pages;
           this.navBarData.push(nav_item);
         } else if (item['template'] === 'summary' || item['template'] === 'conversion') {
           let card = this.processSummaryCard(item['template'], item['name'], item['collection']);
-          let detail_pages = this.processSummaryPage(item['template'], item['detail_trends']);
+          let detail_pages = this.processSummaryPage(item['name'], item['detail_trends']);
           card.setDetailPages(detail_pages);
           this.homeCards.push(card);
           let nav_item = {};
@@ -81,6 +83,7 @@ export class DataProvider {
           this.navBarData.push(nav_item);
         }
       });
+      this.navBarData.push({ 'title': 'Notifications', 'component': NotificationPage })
       this.navBarData.push({ 'title': 'Log Out', 'component': LoginPage });
       this.homeCardsSubject.next(this.homeCards);
       this.navBarDataSubject.next(this.navBarData);
@@ -212,6 +215,7 @@ export class DataProvider {
             }
             bullet['data'] = bullet_data;
             bullet['isPer'] = isPer;
+            bullets.push(bullet);
 
           }
           else if (index === 2) {
@@ -256,6 +260,7 @@ export class DataProvider {
           }
         });
         let page = new SummaryPage(line_one_vals, line_one_xlabels, line_two_vals, line_two_xlabels, bullets, axis_labels);
+        page.setPageName(type);
         pages.push(page);
       });
 
@@ -303,7 +308,7 @@ export class DataProvider {
     return new ChannelCard(name, bullets, donut, donut_cols);;
   }
 
-  processChannelPage(detail_trends: any[]) {
+  processChannelPage(name: string, detail_trends: any[]) {
     let detail_pages: any[] = [];
 
     detail_trends.forEach((page) => {
@@ -352,10 +357,10 @@ export class DataProvider {
                     iter++;
                   }
                   if (index == 0) {
-                    lastweek_bullet_data.push(bullet);
+                    lastweek_bullet_data=bullet;
                   }
                   else if (index == 1) {
-                    today_bullet_data.push(bullet);
+                    today_bullet_data=bullet;
                   }
 
 
@@ -368,6 +373,7 @@ export class DataProvider {
 
         });
         let page_obj = new ChannelPage(today_bullet_data, lastweek_bullet_data);
+        page_obj.setPageName(name);
         detail_pages.push(page_obj);
       }
 
