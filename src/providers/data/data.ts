@@ -184,16 +184,17 @@ export class DataProvider {
         let line_one_vals = [];
         let line_two_xlabels = [];
         let line_two_vals = [];
+        let is_val_per: boolean = false;
 
         item.forEach((obj, index) => {
           if (index === 0 || index === 1) {
             let bullet = {};
-            let bullet_data: any[] = [];
+            let bullet_data: any = {};
             let isPer: boolean = false;
             for (let o in obj) {
               if (Object.prototype.toString.call(obj[o]) === '[object Object]') {
                 let collection = obj[o];
-
+                let b_count = 0;
                 for (let d in collection['data']) {
                   let arr = [];
                   for (let i in collection['data'][d]) {
@@ -202,6 +203,7 @@ export class DataProvider {
                       let str: string = temp;
                       if (str.endsWith('%')) {
                         isPer = true;
+                        is_val_per = true;
                         temp = parseFloat(temp);
                       }
                     }
@@ -209,7 +211,15 @@ export class DataProvider {
 
 
                   }
-                  bullet_data.push(arr);
+                  if(b_count == 0){
+                    bullet_data['actual'] = arr;
+                  }else if(b_count === 1){
+                    bullet_data['target'] = arr;
+                  }else{
+                    bullet_data['projected'] = arr;
+                  }
+                  //bullet_data.push(arr);
+                  b_count++;
                 }
               }
             }
@@ -237,7 +247,11 @@ export class DataProvider {
                     for (let d in data) {
                       let line_arr = data[d];
                       for (let x in line_arr) {
-                        let val = line_arr[x];
+                        let val: any = line_arr[x];
+                        if(isNaN(val)){
+                          val = parseFloat(val);
+                          is_val_per = true;
+                        }
                         if (val === null) {
                           val = 'abcd';
                         }

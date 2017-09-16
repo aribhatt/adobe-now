@@ -17,7 +17,36 @@
 
 
 <ion-content padding>
-    <p></p>
-    <div class="bar-line-wrapper"></div>
+    <div class="page_name">
+        <h3>{{page_name}}</h3>
+    </div>
+    <compare-bullet [todayBullet]="today_bullet" [lastWeekBullet]="lastweek_bullet" showCompare=true></compare-bullet>
+    <div class="legend-wrapper-page">
+        <span class="legend lg-actual">Actual</span>
+        <span class="legend lg-target">Target</span>
+        <span class="legend lg-projected">Projected</span>
+    </div>
+    <div class="x-axis-label">
+        <p>Hours</p>
+    </div>
+    <div class="flex-div">
+        <div class="graph-wrapper" #graphwrapper>
+            <graph-line [card]="page_data"></graph-line>
+        </div>
+        <div class="y-axis-label">
+            <svg xmlns="http://www.w3.org/2000/svg">
+            <text [attr.x]="margin_top" y="25" transform="rotate(-90,10,20)">{{label}}</text>
+            </svg>
+        </div>
+    </div>
+
 
 </ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <img src="../../assets/images/icon_msg_40.png">
+        <img src="../../assets/images/icon_msg_40.png">
+        <img src="../../assets/images/icon_gear_40.png">
+    </ion-toolbar>
+</ion-footer>

@@ -38,6 +38,13 @@ export class UtilsProvider {
     return this.kformat(num);
   }
 
+  formatter = (num: any) =>{
+    if(isNaN(num)){
+      return num;
+    }
+    return this.kformat(num);
+  }
+
 
 
 }

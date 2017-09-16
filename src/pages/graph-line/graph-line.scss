@@ -1,3 +1,40 @@
-page-graph-line {
-
+.line-chart {
+    width: 100%;
+    .c3-axis-y {
+        g {
+            &.tick {
+                line {
+                    display: none;
+                }
+            }
+        }
+        path {
+            &.domain {
+                display: none;
+            }
+        }
+    }
+    .c3-axis-x {
+        g {
+            &.tick {
+                line {
+                    display: none;
+                }
+                &:nth-child(even) {
+                    display: none;
+                }
+            }
+        }
+        path {
+            &.domain {
+                display: none;
+            }
+        }
+    }
+    .c3-xgrid {
+        stroke-dasharray: unset;
+    }
+    .c3-ygrid {
+        stroke-dasharray: unset;
+    }
 }

@@ -54,7 +54,11 @@ export class CompareBulletPage implements OnInit, OnChanges {
   setData() {
     if (this.today) {
       this.today_data = this.today;
-      this.bullet_name = this.today['title'];
+      if(this.today['title']){
+        this.bullet_name = this.today['title'];
+      }else{
+        this.bullet_name = 'Total';
+      }
     }
     if (this.lastweek) {
       this.lastweek_data = this.lastweek;
