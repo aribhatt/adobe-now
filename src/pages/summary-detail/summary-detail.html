@@ -45,8 +45,14 @@
 
 <ion-footer>
     <ion-toolbar>
-        <img src="../../assets/images/icon_msg_40.png">
-        <img src="../../assets/images/icon_msg_40.png">
-        <img src="../../assets/images/icon_gear_40.png">
+        <button ion-button icon-only (click)="goto('HOME')">
+            <ion-icon name="home"></ion-icon>
+          </button>
+        <button ion-button icon-only (click)="goto('NOTIFICATION')">
+            <ion-icon name="mail"></ion-icon>
+          </button>
+        <button ion-button icon-only (click)="goto('SETTINGS')">
+            <ion-icon name="settings"></ion-icon>
+          </button>
     </ion-toolbar>
 </ion-footer>

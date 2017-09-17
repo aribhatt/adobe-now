@@ -54,4 +54,30 @@
     }
 }
 
+ion-footer {
+    .toolbar-background {
+        background: black;
+    }
+    .toolbar-content {
+        .button {
+            width: 33%;
+            float: left;
+            height: 40px;
+            padding: 0;
+            border: none;
+            border-radius: 0;
+            margin: 0;
+            z-index: inherit;
+            background-color: unset;
+        }
+    }
+}
+
+ion-header {
+    &:after {
+        background-image: unset !important;
+        height: 0 !important;
+    }
+}
+
 @media only screen and (orientation: landscape) {}

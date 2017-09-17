@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { NotificationPage } from '../notification/notification';
+import { AboutPage } from '../about/about';
 /**
  * Generated class for the SummaryDetailPage page.
  *
@@ -46,6 +47,23 @@ export class SummaryDetailPage implements AfterViewInit {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
     this.margin_top = -1 * (this.wrapper.nativeElement.offsetWidth - 100);
+  }
+
+  goto(page: string) {
+    console.log(page);
+    switch (page) {
+      case 'HOME':
+        this.navCtrl.pop();
+        break;
+      case 'NOTIFICATION':
+        this.navCtrl.push(NotificationPage);
+        break;
+      case 'SETTINGS':
+        this.navCtrl.push(AboutPage);
+        break;
+      default:
+        break;
+    }
   }
 
 }

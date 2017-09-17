@@ -7,11 +7,10 @@ import { ChannelCard } from './models/channel-card.model';
 import { ChannelPage } from './models/channel-page.model';
 import { Subject } from 'rxjs/Subject';
 
-import { SummaryDetailPage } from '../../pages/summary-detail/summary-detail';
-import { ChannelDetailPage } from '../../pages/channel-detail/channel-detail';
-import { HomePage } from '../../pages/home/home';
-import { LoginPage } from '../../pages/login/login';
-import { NotificationPage } from '../../pages/notification/notification';
+//import { SummaryDetailPage } from '../../pages/summary-detail/summary-detail';
+//import { ChannelDetailPage } from '../../pages/channel-detail/channel-detail';
+//import { LoginPage } from '../../pages/login/login';
+//import { NotificationPage } from '../../pages/notification/notification';
 import { UtilsProvider } from '../utils/utils';
 /*
   Generated class for the DataProvider provider.
@@ -21,17 +20,22 @@ import { UtilsProvider } from '../utils/utils';
 */
 @Injectable()
 export class DataProvider {
+  APP_VERSION: string = '1.0.0';
+  REQUEST_URL: string = '';
+  last_refreshed: string = '';
   homeCards: any[] = [];
   homeCardsSubject: Subject<any[]> = new Subject<any[]>();
   navBarData: any[] = [];
   navBarDataSubject: Subject<any[]> = new Subject<any[]>();
   profile: any = {};
-  profile_subject:Subject<any> = new Subject<any>()
+  profile_subject:Subject<any> = new Subject<any>();
 
   constructor(public http: Http, private utils: UtilsProvider) {
   }
 
-  fetchData(url: string) {
+  fetchData() {
+    let url: string = this.getRequestUrl();
+    this.last_refreshed = (new Date()).toISOString();
     let self = this;
     if (url) {
       this.http.get(url).subscribe(
@@ -59,7 +63,7 @@ export class DataProvider {
       let cards: any[] = json['cards'];
       this.setProfile(json['profile']);
 
-      //this.navBarData.push({ 'title': 'Home', 'component': HomePage });
+      this.navBarData.push({ 'title': 'Home', 'component': {}});
       cards.forEach((item) => {
         if (item['template'] === 'channels') {
           let card = this.processChannelCard(item['name'], item['collection']);
@@ -67,8 +71,9 @@ export class DataProvider {
           console.log(detail_pages);
           this.homeCards.push(card);
           let nav_item = {};
+
           nav_item['title'] = item['name'];
-          nav_item['component'] = ChannelDetailPage;
+          nav_item['type'] = item['template']
           nav_item['payload'] = detail_pages;
           this.navBarData.push(nav_item);
         } else if (item['template'] === 'summary' || item['template'] === 'conversion') {
@@ -78,13 +83,13 @@ export class DataProvider {
           this.homeCards.push(card);
           let nav_item = {};
           nav_item['title'] = item['name'];
-          nav_item['component'] = SummaryDetailPage;
+          nav_item['type'] = item['template'];
           nav_item['payload'] = detail_pages;
           this.navBarData.push(nav_item);
         }
       });
-      this.navBarData.push({ 'title': 'Notifications', 'component': NotificationPage })
-      this.navBarData.push({ 'title': 'Log Out', 'component': LoginPage });
+      this.navBarData.push({ 'title': 'Notifications', 'type': 'notification' })
+      this.navBarData.push({ 'title': 'Log Out', 'type': 'login' });
       this.homeCardsSubject.next(this.homeCards);
       this.navBarDataSubject.next(this.navBarData);
     }
@@ -402,6 +407,22 @@ export class DataProvider {
 
   getNavBarDataObservable() {
     return this.navBarDataSubject.asObservable();
+  }
+
+  setRequestUrl(url: string){
+    this.REQUEST_URL = url;
+  }
+
+  getRequestUrl(){
+    return this.REQUEST_URL;
+  }
+
+  getLastRefreshed(){
+    return this.last_refreshed;
+  }
+
+  getAppVersion(){
+    return this.APP_VERSION;
   }
 
 }

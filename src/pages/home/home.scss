@@ -1,35 +1,4 @@
 page-home {
-    $legend_circle_dimen: 8px;
-    .card {
-        .title {
-            width: 70%;
-            float: left;
-            padding: 2px 6px;
-            height: 30px;
-            font-size: 16px;
-            line-height: 30px;
-        }
-        .email-icon {
-            width: 29%;
-            float: left;
-            padding: 0px 12px;
-            img {
-                border-right-width: 8px;
-                border-left-width: 8px;
-                border-top-width: 6px;
-                border-bottom-width: 0px;
-                border-top-left-radius: 4px;
-                border-top-right-radius: 4px;
-                border-color: white;
-                border-style: solid;
-                height: 20px;
-                margin-top: 10px;
-                float: right;
-                background-color: white;
-                box-shadow: 1px -2px 4px rgba(0, 0, 0, 0.2);
-            }
-        }
-    }
     .card-wrapper {
         margin-top: 10px;
         margin-bottom: 5px;
@@ -43,7 +12,8 @@ page-home {
                 img {
                     padding: 4px;
                     border-radius: 50%;
-                    border: 2px dashed grey;
+                    border: 2px dashed $default_text_color;
+                    ;
                 }
                 .icon-left {
                     height: 60px;
@@ -75,13 +45,22 @@ page-home {
             p:first-child {
                 padding: 2px;
                 margin: 2px;
+                color: $default_text_color;
             }
             p:last-child {
                 padding: 0;
                 margin: 0;
                 font-size: 12px;
+                color: $default_text_color;
             }
         }
+    }
+}
+
+ion-header {
+    &:after {
+        background-image: unset !important;
+        height: 0 !important;
     }
 }
 

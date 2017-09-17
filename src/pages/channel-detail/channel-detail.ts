@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CompareBulletPage } from '../compare-bullet/compare-bullet';
+import { NotificationPage } from '../notification/notification';
+import { AboutPage } from '../about/about';
 /**
  * Generated class for the ChannelDetailPage page.
  *
@@ -60,6 +62,23 @@ export class ChannelDetailPage {
           this.showCompareBullet[i] = false;
         }
       }
+    }
+  }
+
+  goto(page: string) {
+    console.log(page);
+    switch (page) {
+      case 'HOME':
+        this.navCtrl.pop();
+        break;
+      case 'NOTIFICATION':
+        this.navCtrl.push(NotificationPage);
+        break;
+      case 'SETTINGS':
+        this.navCtrl.push(AboutPage);
+        break;
+      default:
+        break;
     }
   }
 

@@ -9,7 +9,6 @@ import { NotificationPage } from '../pages/notification/notification';
 import { AboutPage } from '../pages/about/about';
 import { SummaryDetailPage } from '../pages/summary-detail/summary-detail';
 import { ChannelDetailPage } from '../pages/channel-detail/channel-detail';
-import { ListPage } from '../pages/list/list';
 import { DataProvider } from '../providers/data/data';
 @Component({
   templateUrl: 'app.html'
@@ -27,11 +26,6 @@ export class MyApp implements OnInit {
     this.initializeApp();
     let self = this;
 
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: 'HomePage' },
-      { title: 'List', component: ListPage }
-    ];
     this.dataProvider.getNavBarDataObservable().subscribe(
       (data: any[]) => {
         //console.log(data);
@@ -46,7 +40,8 @@ export class MyApp implements OnInit {
   ngOnInit() {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    this.dataProvider.fetchData('../assets/json/data.json');
+    this.dataProvider.setRequestUrl('../assets/json/data.json');
+    this.dataProvider.fetchData();
 
   }
 
@@ -63,7 +58,22 @@ export class MyApp implements OnInit {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     if (page && page.title !== 'Home') {
-      this.nav.push(page.component, page.payload);
+      let component: any = {};
+      switch (page['type']) {
+        case 'channels':
+          component = ChannelDetailPage;
+          break;
+        case 'summary':
+          component = SummaryDetailPage;
+          break;
+        case 'login':
+          component = LoginPage;
+          break;
+        case 'notification':
+          component = NotificationPage;
+          break;
+      }
+      this.nav.push(component, page.payload);
     }
   }
 }

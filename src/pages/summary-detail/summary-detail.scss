@@ -37,6 +37,7 @@ ion-content {
             position: absolute;
             width: max-content;
             margin-left: -14px;
+            color: $default_text_color;
         }
     }
     .x-axis-label {
@@ -44,17 +45,21 @@ ion-content {
         p {
             margin: 0 10px;
             text-align: left;
+            color: $default_text_color;
         }
     }
     .page_name {
         text-align: center;
         margin: 20px 10px;
+        h3 {
+            color: $default_text_color;
+        }
     }
     .legend-wrapper-page {
         text-align: right;
         margin: 10px;
         .legend {
-            color: black;
+            color: $default_text_color;
             font-size: 10px;
             line-height: 10px;
             margin-right: 5px;
@@ -101,12 +106,28 @@ ion-content {
     // filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
+ion-header {
+    &:after {
+        background-image: unset !important;
+        height: 0 !important;
+    }
+}
+
 ion-footer {
-    ion-toolbar {
-        display: flex;
-        justify-content: space-around;
-        img {
+    .toolbar-background {
+        background: black;
+    }
+    .toolbar-content {
+        .button {
+            width: 33%;
+            float: left;
             height: 40px;
+            padding: 0;
+            border: none;
+            border-radius: 0;
+            margin: 0;
+            z-index: inherit;
+            background-color: unset;
         }
     }
 }

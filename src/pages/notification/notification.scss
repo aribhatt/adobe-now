@@ -1,3 +1,8 @@
-page-notification {
+page-notification {}
 
+ion-header {
+    &:after {
+        background-image: unset !important;
+        height: 0 !important;
+    }
 }
