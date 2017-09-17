@@ -68,7 +68,7 @@ export class DataProvider {
         if (item['template'] === 'channels') {
           let card = this.processChannelCard(item['name'], item['collection']);
           let detail_pages = this.processChannelPage(item['name'],item['detail_trends']);
-          console.log(detail_pages);
+          card.setDetailPages(detail_pages);
           this.homeCards.push(card);
           let nav_item = {};
 

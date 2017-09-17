@@ -8,7 +8,7 @@ export class ChannelCard {
 
     constructor(name: string,
         bullets: any, donut: any, donut_cols?: any[]) {
-        this.type = 'channel';
+        this.type = 'channels';
         this.name = name;
         this.bullets = bullets;
         this.donut = donut;

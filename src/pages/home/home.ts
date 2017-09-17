@@ -1,7 +1,10 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
-
+import { ChannelDetailPage } from '../channel-detail/channel-detail';
+import { SummaryDetailPage } from '../summary-detail/summary-detail';
+import { AboutPage } from '../about/about';
+import { NotificationPage } from '../notification/notification';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
@@ -48,4 +51,27 @@ export class HomePage implements OnInit {
       }
     );
   }
+  openPage(page: string, payload?: any) {
+    // Reset the content nav to have just this page
+    // we wouldn't want the back button to show in this scenario
+      let component: any = {};
+      switch (page) {
+        case 'channels':
+          component = ChannelDetailPage;
+          break;
+
+        case 'summary':
+          component = SummaryDetailPage;
+          break;
+        case 'about':
+          component = AboutPage;
+          break;
+        case 'notification':
+          component = NotificationPage;
+          break;
+      }
+      this.navCtrl.push(component, payload);
+    
+  }
+
 }
