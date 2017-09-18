@@ -59,7 +59,7 @@ export class GraphLinePage implements OnInit, AfterViewInit, OnChanges {
     }
     console.log(this.card);
     let self = this;
-    let colors: any[] = ['orange', 'green'];
+    let colors: any[] = ['green', 'orange'];
     let bar_width = this.chart.nativeElement.offsetWidth;
     let bar_height = bar_width;
     let xlabels = this.card['line_one_xlabel'].slice(0);
@@ -89,12 +89,12 @@ export class GraphLinePage implements OnInit, AfterViewInit, OnChanges {
         width: bar_width
       },
       data: {
-        columns: [line_one, line_two],
+        columns: [line_two, line_one],
         axes: {
           // Cost: 'y',
           // 'CPC': 'y2'
         },
-        type: 'area-spline',
+        type: 'line',
         types: {
           // 'CPC': 'line',
           // CTR: 'line',
@@ -150,10 +150,10 @@ export class GraphLinePage implements OnInit, AfterViewInit, OnChanges {
       },
 
       point: {
-        r: 4,
+        r: 3,
         focus: {
           expand: {
-            r: 5.5
+            r: 4.5
           }
         }
       }
