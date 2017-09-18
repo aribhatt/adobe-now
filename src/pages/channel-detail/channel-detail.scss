@@ -1,83 +1,86 @@
-.toolbar-content {
-    display: flex !important;
-    justify-content: center !important;
-    ion-chip {
-        margin-left: -56px;
-        color: white;
-        background-color: blue;
-        ion-icon {
-            background-color: blue !important;
-            color: white !important;
-        }
-    }
-}
-
-.page_name {
-    text-align: center;
-    margin: 20px 10px;
-}
-
-.legend-wrapper-page {
-    text-align: right;
-    margin: 10px;
-    .legend {
-        color: black;
-        font-size: 10px;
-        line-height: 10px;
-        margin-right: 5px;
-        &:before {
-            content: "";
-            height: 8px;
-            width: 8px;
-            border-radius: 8px;
-            line-height: 10px;
-            margin: 0 3px;
-            background-color: black;
-            display: inline-block;
-            vertical-align: middle;
-        }
-        &.lg-actual {
-            &:before {
-                background-color: orange;
-            }
-        }
-        &.lg-target {
-            &:before {
-                background-color: green;
-            }
-        }
-        &.lg-projected {
-            &:before {
-                background-color: lightgrey;
-            }
-        }
-    }
-}
-
-ion-footer {
-    .toolbar-background {
-        background: black;
-    }
+page-channel-detail {
     .toolbar-content {
-        .button {
-            width: 33%;
-            float: left;
-            height: 40px;
-            padding: 0;
-            border: none;
-            border-radius: 0;
-            margin: 0;
-            z-index: inherit;
-            background-color: unset;
+        display: flex !important;
+        justify-content: center !important;
+        ion-chip {
+            margin-left: -56px;
+            color: $date_chip_text;
+            background-color: $date_chip_background;
+            ion-icon {
+                background-color: $date_chip_background !important;
+                &:before {
+                    color: $date_chip_text !important;
+                }
+            }
+        }
+    }
+    .page_name {
+        text-align: center;
+        margin: 20px 10px;
+    }
+    .legend-wrapper-page {
+        text-align: right;
+        margin: 10px;
+        .legend {
+            color: black;
+            font-size: 10px;
+            line-height: 10px;
+            margin-right: 5px;
+            &:before {
+                content: "";
+                height: 8px;
+                width: 8px;
+                border-radius: 8px;
+                line-height: 10px;
+                margin: 0 3px;
+                background-color: black;
+                display: inline-block;
+                vertical-align: middle;
+            }
+            &.lg-actual {
+                &:before {
+                    background-color: orange;
+                }
+            }
+            &.lg-target {
+                &:before {
+                    background-color: green;
+                }
+            }
+            &.lg-projected {
+                &:before {
+                    background-color: lightgrey;
+                }
+            }
+        }
+    }
+    ion-footer {
+        .toolbar-background {
+            background: black;
+        }
+        .toolbar-content {
+            .button {
+                width: 33%;
+                float: left;
+                height: 40px;
+                padding: 0;
+                border: none;
+                border-radius: 0;
+                margin: 0;
+                z-index: inherit;
+                background-color: unset;
+            }
+        }
+    }
+    ion-header {
+        &:after {
+            background-image: unset !important;
+            height: 0 !important;
+        }
+    }
+    @media only screen and (orientation: landscape) {
+        .scroll-content {
+            padding: 16px 25% !important;
         }
     }
 }
-
-ion-header {
-    &:after {
-        background-image: unset !important;
-        height: 0 !important;
-    }
-}
-
-@media only screen and (orientation: landscape) {}
