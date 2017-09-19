@@ -41,8 +41,18 @@ export class UtilsProvider {
   formatter = (num: any) =>{
     if(isNaN(num)){
       return num;
+    }else if( num < 1){
+      return num.toFixed(2);
     }
     return this.kformat(num);
+  }
+
+  percentFormatter = (num: any) =>{
+    return num + '%';
+  }
+
+  dollarFormatter = (num: any) => {
+    return '$' + num;
   }
 
 

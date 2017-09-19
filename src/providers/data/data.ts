@@ -28,7 +28,7 @@ export class DataProvider {
   navBarData: any[] = [];
   navBarDataSubject: Subject<any[]> = new Subject<any[]>();
   profile: any = {};
-  profile_subject:Subject<any> = new Subject<any>();
+  profile_subject: Subject<any> = new Subject<any>();
 
   constructor(public http: Http, private utils: UtilsProvider) {
   }
@@ -52,7 +52,7 @@ export class DataProvider {
     }
   }
 
-  getProfileObservable(){
+  getProfileObservable() {
     return this.profile_subject.asObservable();
   }
 
@@ -63,23 +63,33 @@ export class DataProvider {
       let cards: any[] = json['cards'];
       this.setProfile(json['profile']);
 
-      this.navBarData.push({ 'title': 'Home', 'component': {}});
+      this.navBarData.push({ 'title': 'Home', 'component': {} });
       cards.forEach((item) => {
+        let formatter: any;
+        if(item['type'] === 'percentage'){
+          formatter = this.utils.percentFormatter;
+        }else if(item['type'] === 'dollar'){
+          formatter = this.utils.dollarFormatter;
+        }else{
+          formatter = this.utils.formatter;
+        }
+
         if (item['template'] === 'channels') {
           let card = this.processChannelCard(item['name'], item['collection']);
-          let detail_pages = this.processChannelPage(item['name'],item['detail_trends']);
+          let detail_pages = this.processChannelPage(item['name'], item['detail_trends'], formatter);
           card.setDetailPages(detail_pages);
+          card.setFormatter(formatter);
           this.homeCards.push(card);
           let nav_item = {};
-
           nav_item['title'] = item['name'];
           nav_item['type'] = item['template']
           nav_item['payload'] = detail_pages;
           this.navBarData.push(nav_item);
         } else if (item['template'] === 'summary' || item['template'] === 'conversion') {
           let card = this.processSummaryCard(item['template'], item['name'], item['collection']);
-          let detail_pages = this.processSummaryPage(item['name'], item['detail_trends']);
+          let detail_pages = this.processSummaryPage(item['name'], item['detail_trends'], formatter);
           card.setDetailPages(detail_pages);
+          card.setFormatter(formatter);
           this.homeCards.push(card);
           let nav_item = {};
           nav_item['title'] = item['name'];
@@ -177,7 +187,7 @@ export class DataProvider {
     return new SummaryCard(type, name, lweek, today, barLineData);
   }
 
-  processSummaryPage(type, detail_trends: any[]) {
+  processSummaryPage(type, detail_trends: any[], formatter: any) {
     let pages: any = [];
 
 
@@ -216,11 +226,11 @@ export class DataProvider {
 
 
                   }
-                  if(b_count == 0){
+                  if (b_count == 0) {
                     bullet_data['actual'] = arr;
-                  }else if(b_count === 1){
+                  } else if (b_count === 1) {
                     bullet_data['target'] = arr;
-                  }else{
+                  } else {
                     bullet_data['projected'] = arr;
                   }
                   //bullet_data.push(arr);
@@ -253,7 +263,7 @@ export class DataProvider {
                       let line_arr = data[d];
                       for (let x in line_arr) {
                         let val: any = line_arr[x];
-                        if(isNaN(val)){
+                        if (isNaN(val)) {
                           val = parseFloat(val);
                           is_val_per = true;
                         }
@@ -280,6 +290,7 @@ export class DataProvider {
         });
         let page = new SummaryPage(line_one_vals, line_one_xlabels, line_two_vals, line_two_xlabels, bullets, axis_labels);
         page.setPageName(type);
+        page.setFormatter(formatter);
         pages.push(page);
       });
 
@@ -307,6 +318,10 @@ export class DataProvider {
                   donut[d] = data[param][day[0]][d];
                   donut_cols.push(self.utils.getColor(i));
                 } else if (index === 1) {
+                  let temp: any = [data[param][day[0]][d]];
+                  if (isNaN(temp)) {
+                    temp = parseFloat(temp);
+                  }
                   if (bullets[d]) {
                     bullets[d][param] = [data[param][day[0]][d]];
                   } else {
@@ -327,7 +342,7 @@ export class DataProvider {
     return new ChannelCard(name, bullets, donut, donut_cols);;
   }
 
-  processChannelPage(name: string, detail_trends: any[]) {
+  processChannelPage(name: string, detail_trends: any[], formatter: any) {
     let detail_pages: any[] = [];
 
     detail_trends.forEach((page) => {
@@ -376,10 +391,10 @@ export class DataProvider {
                     iter++;
                   }
                   if (index == 0) {
-                    lastweek_bullet_data=bullet;
+                    lastweek_bullet_data = bullet;
                   }
                   else if (index == 1) {
-                    today_bullet_data=bullet;
+                    today_bullet_data = bullet;
                   }
 
 
@@ -393,6 +408,7 @@ export class DataProvider {
         });
         let page_obj = new ChannelPage(today_bullet_data, lastweek_bullet_data);
         page_obj.setPageName(name);
+        page_obj.setFormatter(formatter);
         detail_pages.push(page_obj);
       }
 
@@ -409,19 +425,19 @@ export class DataProvider {
     return this.navBarDataSubject.asObservable();
   }
 
-  setRequestUrl(url: string){
+  setRequestUrl(url: string) {
     this.REQUEST_URL = url;
   }
 
-  getRequestUrl(){
+  getRequestUrl() {
     return this.REQUEST_URL;
   }
 
-  getLastRefreshed(){
+  getLastRefreshed() {
     return this.last_refreshed;
   }
 
-  getAppVersion(){
+  getAppVersion() {
     return this.APP_VERSION;
   }
 

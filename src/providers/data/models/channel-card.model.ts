@@ -6,6 +6,8 @@ export class ChannelCard {
     donut_cols: any[] = [];
     detail_pages: any[] = [];
 
+    formatter: any;
+
     constructor(name: string,
         bullets: any, donut: any, donut_cols?: any[]) {
         this.type = 'channels';
@@ -84,5 +86,13 @@ export class ChannelCard {
 
     getDetailPages(){
         return this.detail_pages;
+    }
+
+    setFormatter(formatter: any){
+        this.formatter = formatter;
+    }
+
+    getFormatter(){
+        return this.formatter;
     }
 }

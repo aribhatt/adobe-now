@@ -6,6 +6,7 @@ export class SummaryPage{
     line_two_xlabel: any[];
     labels: any[] = [];
     page_name: string = '';
+    formatter: any;
 
     constructor(line_one_data: any[], line_one_xlabel: any[], line_two_data: any[], line_two_xlabel: any[], compareBullet: any[], labels:any[]){
         this.line_one_data = line_one_data;
@@ -44,5 +45,13 @@ export class SummaryPage{
 
     getPageName(){
         return this.page_name;
+    }
+
+    setFormatter(formatter: any){
+        this.formatter = formatter;
+    }
+
+    getFormatter(){
+        return this.formatter;
     }
 }

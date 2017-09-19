@@ -3,7 +3,7 @@ export class ChannelPage {
     today_bullet: any[] = [];
     lastweek_bullet: any[] = [];
     bullet_names: any[] = []
-
+    formatter: any;
     constructor(today_bullet: any[], lastweek_bullet: any[]) {
         this.lastweek_bullet = lastweek_bullet;
         this.today_bullet = today_bullet;
@@ -27,15 +27,23 @@ export class ChannelPage {
         }
     }
 
-    getBulletNames(){
+    getBulletNames() {
         return this.bullet_names;
     }
 
-    setPageName(name: string){
+    setPageName(name: string) {
         this.page_name = name;
     }
 
-    getPageName(){
+    getPageName() {
         return this.page_name;
+    }
+
+    setFormatter(formatter: any) {
+        this.formatter = formatter;
+    }
+
+    getFormatter() {
+        return this.formatter;
     }
 }

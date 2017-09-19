@@ -66,6 +66,8 @@ export class GraphLinePage implements OnInit, AfterViewInit, OnChanges {
     let line_one = this.card['line_one_data'].slice(0);
     let line_two = this.card['line_two_data'].slice(0);
     let labels = this.card['labels'].slice(0);
+    let formatter: any = this.card.getFormatter();
+    console.log('formatter',formatter);
     line_one.unshift('Actual');
     line_two.unshift('Target');
     let options: any = {
@@ -135,7 +137,7 @@ export class GraphLinePage implements OnInit, AfterViewInit, OnChanges {
             bottom: 0
           },
           tick: {
-            format: self.utils.formatter // ADD
+            format: formatter // ADD
             //count: 5
           }
         },

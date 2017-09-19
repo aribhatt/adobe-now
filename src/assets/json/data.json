@@ -10,6 +10,7 @@
             "template": "summary",
             "date_today": "2017-06-15",
             "last_refreshed": "2017-06-15 14:09:12 IST",
+            "type": "number",
             "collection": [{
                     "name": "Today",
                     "axis_label": {
@@ -294,6 +295,7 @@
             "template": "summary",
             "date_today": "2017-06-15",
             "last_refreshed": "2017-06-15 14:08:59 IST",
+            "type": "percentage",
             "collection": [{
                     "name": "Today",
                     "axis_label": {
@@ -578,6 +580,7 @@
             "template": "channels",
             "date_today": "2017-06-15",
             "last_refreshed": "2017-06-15 14:09:10 IST",
+            "type": "number",
             "collection": [{
                     "name": "Today",
                     "axis_label": {
@@ -732,6 +735,7 @@
             "template": "channels",
             "date_today": "2017-06-15",
             "last_refreshed": "2017-06-15 14:09:19 IST",
+            "type": "number",
             "collection": [{
                     "name": "Today",
                     "axis_label": {
