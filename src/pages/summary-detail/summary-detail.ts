@@ -24,6 +24,7 @@ export class SummaryDetailPage implements AfterViewInit {
   today_bullet: any;
   label = '';
   margin_top: number = 0;
+  formatter: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     console.log('inside detail', navParams);
@@ -32,6 +33,7 @@ export class SummaryDetailPage implements AfterViewInit {
       this.page_name = this.page_data['page_name'];
       this.compare_bullet_data = this.page_data['compareBullet'];
       this.label = this.page_data['labels'][1];
+      this.formatter = this.page_data.getFormatter();
       if (Object.prototype.toString.call(this.compare_bullet_data) === '[object Array]' && this.compare_bullet_data.length === 2) {
         this.lastweek_bullet = this.compare_bullet_data[0]['data'];
         this.today_bullet = this.compare_bullet_data[1]['data'];

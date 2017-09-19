@@ -1,7 +1,6 @@
 import { Component, Input, ViewChild, OnInit, OnChanges, AfterViewInit, SimpleChanges } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { C3ServiceProvider, C3, D3 } from '../../providers/c3-service/c3-service';
-import { UtilsProvider } from '../../providers/utils/utils'
 /**
  * Generated class for the GraphLinePage page.
  *
@@ -21,7 +20,7 @@ export class GraphLinePage implements OnInit, AfterViewInit, OnChanges {
   private d3: D3;
   viewInit: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private utils: UtilsProvider, private c3Service: C3ServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private c3Service: C3ServiceProvider) {
     this.c3 = c3Service.getC3();
     this.d3 = c3Service.getD3();
   }
@@ -67,7 +66,6 @@ export class GraphLinePage implements OnInit, AfterViewInit, OnChanges {
     let line_two = this.card['line_two_data'].slice(0);
     let labels = this.card['labels'].slice(0);
     let formatter: any = this.card.getFormatter();
-    console.log('formatter',formatter);
     line_one.unshift('Actual');
     line_two.unshift('Target');
     let options: any = {

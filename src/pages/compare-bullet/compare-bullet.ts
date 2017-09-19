@@ -1,6 +1,5 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { UtilsProvider } from '../../providers/utils/utils';
 
 /**
  * Generated class for the CompareBulletPage page.
@@ -18,6 +17,7 @@ export class CompareBulletPage implements OnInit, OnChanges {
   @Input('todayBullet') today: any;
   @Input('lastWeekBullet') lastweek: any;
   @Input('showCompare') showCompare: boolean = true;
+  @Input('formatter') formatter: any;
 
   bullet_name: string = '';
   today_data: any = {};
@@ -33,7 +33,7 @@ export class CompareBulletPage implements OnInit, OnChanges {
   legend_td_target: string = '0';
   legend_td_proj: string = '0';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private utils: UtilsProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ngOnInit() {
@@ -63,30 +63,32 @@ export class CompareBulletPage implements OnInit, OnChanges {
     if (this.lastweek) {
       this.lastweek_data = this.lastweek;
     }
-    this.formatLegends();
+    if(this.formatter){
+      this.formatLegends();
+    }
   }
 
   formatLegends() {
     if (this.lastweek_data) {
       if (this.lastweek_data['actual']) {
-        this.legend_lw_actual = this.utils.getKFormatted(this.lastweek_data['actual'], this.lastweek_data['isPer'])
+        this.legend_lw_actual = this.formatter(this.lastweek_data['actual']);
       }
       if (this.lastweek_data['target']) {
-        this.legend_lw_target = this.utils.getKFormatted(this.lastweek_data['target'], this.lastweek_data['isPer'])
+        this.legend_lw_target = this.formatter(this.lastweek_data['target']);
       }
       if (this.lastweek_data['projected']) {
-        this.legend_lw_proj = this.utils.getKFormatted(this.lastweek_data['projected'], this.lastweek_data['isPer'])
+        this.legend_lw_proj = this.formatter(this.lastweek_data['projected']);
       }
     }
     if (this.today_data) {
       if (this.today_data['actual']) {
-        this.legend_td_actual = this.utils.getKFormatted(this.today_data['actual'], this.today_data['isPer'])
+        this.legend_td_actual = this.formatter(this.today_data['actual']);
       }
       if (this.today_data['target']) {
-        this.legend_td_target = this.utils.getKFormatted(this.today_data['target'], this.today_data['isPer'])
+        this.legend_td_target = this.formatter(this.today_data['target']);
       }
       if (this.today_data['projected']) {
-        this.legend_td_proj = this.utils.getKFormatted(this.today_data['projected'], this.today_data['isPer'])
+        this.legend_td_proj = this.formatter(this.today_data['projected']);
       }
     }
   }

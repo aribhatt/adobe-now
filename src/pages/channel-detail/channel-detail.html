@@ -18,7 +18,7 @@
         <span class="legend lg-target">Target</span>
         <span class="legend lg-projected">Projected</span>
     </div>
-    <compare-bullet *ngFor="let item of today_bullet_data; let i=index" [todayBullet]="today_bullet_data[i]" [lastWeekBullet]="lastweek_bullet_data[i]" [showCompare]="showCompareBullet[i]" (click)="toggleBulletState(i)"></compare-bullet>
+    <compare-bullet *ngFor="let item of today_bullet_data; let i=index" [formatter]="formatter" [todayBullet]="today_bullet_data[i]" [lastWeekBullet]="lastweek_bullet_data[i]" [showCompare]="showCompareBullet[i]" (click)="toggleBulletState(i)"></compare-bullet>
 </ion-content>
 
 <ion-footer>

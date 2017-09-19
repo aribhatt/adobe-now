@@ -1,6 +1,6 @@
 {
   "name": "adobe-now",
-  "app_id": "",
+  "app_id": "a5d5d825",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
