@@ -22,6 +22,7 @@ import { UtilsProvider } from '../utils/utils';
 export class DataProvider {
   APP_VERSION: string = '1.0.0';
   REQUEST_URL: string = '';
+  DATE_STRING: string = '';
   last_refreshed: string = '';
   homeCards: any[] = [];
   homeCardsSubject: Subject<any[]> = new Subject<any[]>();
@@ -65,12 +66,14 @@ export class DataProvider {
 
       this.navBarData.push({ 'title': 'Home', 'component': {} });
       cards.forEach((item) => {
+        this.DATE_STRING = item['date_today'];
+        this.last_refreshed = item['last_refreshed'];
         let formatter: any;
-        if(item['type'] === 'percentage'){
+        if (item['type'] === 'percentage') {
           formatter = this.utils.percentFormatter;
-        }else if(item['type'] === 'dollar'){
+        } else if (item['type'] === 'dollar') {
           formatter = this.utils.dollarFormatter;
-        }else{
+        } else {
           formatter = this.utils.formatter;
         }
 
@@ -291,6 +294,7 @@ export class DataProvider {
         let page = new SummaryPage(line_one_vals, line_one_xlabels, line_two_vals, line_two_xlabels, bullets, axis_labels);
         page.setPageName(type);
         page.setFormatter(formatter);
+        page.setDate(this.DATE_STRING);
         pages.push(page);
       });
 
@@ -409,6 +413,7 @@ export class DataProvider {
         let page_obj = new ChannelPage(today_bullet_data, lastweek_bullet_data);
         page_obj.setPageName(name);
         page_obj.setFormatter(formatter);
+        page_obj.setDate(this.DATE_STRING);
         detail_pages.push(page_obj);
       }
 

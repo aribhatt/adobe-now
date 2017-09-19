@@ -22,6 +22,7 @@ export class ChannelDetailPage {
   showCompareBullet: boolean[] = [];
   page_name: string = '';
   formatter: any;
+  date: string;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     console.log('inside detail', navParams);
     if (Object.prototype.toString.call(navParams.data) === '[object Array]') {
@@ -31,6 +32,7 @@ export class ChannelDetailPage {
         this.today_bullet_data = this.page_data['today_bullet'];
         this.lastweek_bullet_data = this.page_data['lastweek_bullet'];
         this.formatter = this.page_data.getFormatter();
+        this.date = this.page_data.getDate();
         this.initCompareBullet();
       }
     }

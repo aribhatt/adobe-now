@@ -4,6 +4,7 @@ export class ChannelPage {
     lastweek_bullet: any[] = [];
     bullet_names: any[] = []
     formatter: any;
+    date: string;
     constructor(today_bullet: any[], lastweek_bullet: any[]) {
         this.lastweek_bullet = lastweek_bullet;
         this.today_bullet = today_bullet;
@@ -45,5 +46,18 @@ export class ChannelPage {
 
     getFormatter() {
         return this.formatter;
+    }
+
+    setDate(date: string){
+        let d = new Date(date);
+        let temp = d.toDateString();
+        let arr = temp.split(' ');
+        if (arr.length === 4) {
+            this.date = arr[1] + ' ' + arr[2] + ', ' + arr[3];
+        }
+    }
+
+    getDate(){
+        return this.date;
     }
 }
