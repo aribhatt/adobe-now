@@ -1,4 +1,10 @@
 page-home {
+    $icon_dimen: 50px;
+    $icon_margin: (-1)*($icon_dimen/2);
+    $icon_border_color: $color_jordy_blue_approx;
+    .scroll-content {
+        background: linear-gradient($color_curious_blue_approx 15%, $color_denim_approx 35%);
+    }
     .card-wrapper {
         margin-top: 10px;
         margin-bottom: 5px;
@@ -12,24 +18,25 @@ page-home {
                 img {
                     padding: 4px;
                     border-radius: 50%;
-                    border: 2px dashed $default_text_color;
-                    ;
+                    border: 2px dashed $icon_border_color;
                 }
                 .icon-left {
-                    height: 60px;
-                    width: 60px;
+                    height: $icon_dimen;
+                    width: $icon_dimen;
                     position: absolute;
                     top: 50%;
-                    margin-top: -30px;
+                    margin-top: $icon_margin;
                     right: 0px;
+                    padding: 10px;
                 }
                 .icon-right {
-                    height: 60px;
-                    width: 60px;
+                    height: $icon_dimen;
+                    width: $icon_dimen;
                     position: absolute;
                     top: 50%;
-                    margin-top: -30px;
+                    margin-top: $icon_margin;
                     left: 0px;
+                    padding: 10px;
                 }
                 .profile {
                     width: 100px;
@@ -55,12 +62,15 @@ page-home {
             }
         }
     }
-}
-
-ion-header {
-    &:after {
-        background-image: unset !important;
-        height: 0 !important;
+    ion-header {
+        &:after {
+            background-image: unset !important;
+            height: 0 !important;
+        }
+        .toolbar-background {
+            background-color: $toolbar_background;
+            border: unset;
+        }
     }
 }
 

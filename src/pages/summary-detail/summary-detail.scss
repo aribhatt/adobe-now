@@ -1,4 +1,7 @@
 page-summary-detail {
+    .scroll-content {
+        background: linear-gradient($color_curious_blue_approx 15%, $color_denim_approx 35%);
+    }
     .toolbar-content {
         display: flex !important;
         justify-content: center !important;
@@ -11,6 +14,10 @@ page-summary-detail {
                 &:before {
                     color: $date_chip_text !important;
                 }
+            }
+            ion-label {
+                margin: 0px 10px 0px 0px;
+                font-weight: 500;
             }
         }
     }
@@ -41,6 +48,10 @@ page-summary-detail {
                 margin-left: -14px;
                 color: $default_text_color;
             }
+            text {
+                -webkit-text-fill-color: $default_text_color;
+                fill: $default_text_color;
+            }
         }
         .x-axis-label {
             padding: 0 50px;
@@ -55,6 +66,7 @@ page-summary-detail {
             margin: 20px 10px;
             h3 {
                 color: $default_text_color;
+                font-weight: 300;
             }
         }
         .legend-wrapper-page {
