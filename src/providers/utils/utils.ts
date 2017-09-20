@@ -22,37 +22,43 @@ export class UtilsProvider {
   constructor(public http: Http) {
   }
 
-  getColor(key: number){
-    if(key < this.donut_color_map.length){
+  getColor(key: number) {
+    if (key < this.donut_color_map.length) {
       return this.donut_color_map[key];
     }
   }
 
-  getKFormatted(num: any, isPer?: boolean){
-    if(isNaN(num)){
+  getKFormatted(num: any, isPer?: boolean) {
+    if (isNaN(num)) {
       return num;
     }
-    if(isPer){
+    if (isPer) {
       return num + '%';
     }
     return this.kformat(num);
   }
 
-  formatter = (num: any) =>{
-    if(isNaN(num)){
+  formatter = (num: any) => {
+    if (!num) {
+      return;
+    } else if (isNaN(num)) {
       return num;
-    }else if( num < 1){
+    } else if (num < 1) {
       return num.toFixed(2);
     }
     return this.kformat(num);
   }
 
-  percentFormatter = (num: any) =>{
-    return num + '%';
+  percentFormatter = (num: any) => {
+    if (num) {
+      return num + '%';
+    }
   }
 
   dollarFormatter = (num: any) => {
-    return '$' + num;
+    if (num) {
+      return '$' + num;
+    }
   }
 
 

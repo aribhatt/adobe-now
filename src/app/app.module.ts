@@ -15,7 +15,7 @@ import { C3ServiceProvider } from '../providers/c3-service/c3-service';
 import { HttpModule } from '@angular/http';
 
 import { HomePageModule } from '../pages/home/home.module';
-//import { AboutPageModule } from '../pages/about/about.module';
+import { AboutPage } from '../pages/about/about';
 import { ChannelDetailPageModule } from '../pages/channel-detail/channel-detail.module';
 import { LoginPageModule } from '../pages/login/login.module';
 import { NotificationPageModule } from '../pages/notification/notification.module';
@@ -24,14 +24,14 @@ import { SummaryDetailPageModule } from '../pages/summary-detail/summary-detail.
 @NgModule({
   declarations: [
     MyApp,
-    ListPage
+    AboutPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
     HomePageModule,
-    //AboutPageModule,
+    //AboutPage,
     ChannelDetailPageModule,
     LoginPageModule,
     NotificationPageModule,
@@ -39,7 +39,7 @@ import { SummaryDetailPageModule } from '../pages/summary-detail/summary-detail.
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp
+    MyApp, AboutPage
   ],
   providers: [
     StatusBar,
